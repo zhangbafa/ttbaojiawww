@@ -1,0 +1,131 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZHI</title>
+    <meta
+      name="description"
+      content="一个狂热的独立开发者"
+    />
+    <meta name="keyword" content="工具集合,工具箱,图片剪辑,查询工具,开发工具,小工具,效率工具箱,独立开发者，出海应用。">
+    <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+    <style>
+        li{
+            margin-bottom: 5px;
+        }
+        #sponsor-box{
+            display: none;
+        }
+        :root{
+            --font-stack:"Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New";
+        }
+    </style>
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt"> 
+                <a href="/" class="no-style">ZHI</a>
+            </div>
+          </header>
+          <nav class="terminal-menu" style="display: none;">
+            <ul>
+              <li>
+                <a href="http://www.mzdbl.com.cn/yulu/index.html" target="_blank" class="menu-item"><span>毛主席语录</span></a>
+                <meta property="position"></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <p></p>
+      <div class="container">
+        <!-- <p>嘿，我是 ᴢʜᴀɴɢ，一个狂热的独立开发者。</p> -->
+        <p>
+            <!-- <br/> -->
+            构思想法并实现它们是我的热情所在。你可以在这里找到我的完整项目列表。
+            <!-- <br/> -->
+        </p>
+        <p>给我发邮件 maigetang@gmail.com</p>
+        <hr>
+        <dialog class="terminal-alert-primary">
+            <p>
+                功能正在开发中...
+                <br/>
+                如果你想联系一个人，而又被拉入黑名单了,但你还记得对方的手机号码，那么可以联系我。
+                <br/>
+                我的微信：xiaobin987
+            </p>
+            <p>
+                <button class="btn btn-default" autofocus>关闭</button>
+            </p>
+        </dialog>
+<ul>
+    <li><a href="./roi.html" id="black">千川ROI计算</a> </li>
+    <hr/>
+    <li><a href="zhibo/index.html" id="black">手机号码测吉凶。</a> </li>
+    <li><a href="./live2.html" id="black">电子拜佛直播间搭建。</a> </li>
+    <li><a href="./danmu2.html" id="black">直播数据统计。</a> </li>
+    <hr/>
+    
+    <li><a href="https://tts-8m5.pages.dev/" target="_blank">免费文本转语音。</a> 45+种配音，更多的语音陆续支持中...
+    </li>
+    <li><a href="https://ainav-b77.pages.dev/" target="_blank">AI精选合集。</a> 最实用、最热门的AI工具，帮助你在工作与学习上更轻松更有效率</li>
+    <li><del><a href="http://app.ttbaojia.com" target="_blank">天天报价。</a> 专门为客户提供报价服务的网站</del></li>
+    <li><del><a href="http://passwordbox.ttbaojia.com/" target="_blank">PasswordBox。</a> 一款专为管理密码设计的软件</del></li>
+    <li><del><a href="http://pingti.ttbaojia.com" target="_blank">网购平替关键词。</a> 平替更有性价比</del></li>
+    <li><del><a href="./sms.html" id="black">第三分短信平台。</del></a> </li>
+    <li><del><a href="http://jiuzhu.ttbaojia.com" target="_blank">救助站。</a> 全国各省市救助站位置一览表</del></li>
+    <li><del><a href="http://t.ttbaojia.com/qianming/" target="_blank"> 手写签名。</a></del></li>
+    <li><a href="http://www.mzdbl.com.cn/yulu/index.html" target="_blank" class="menu-item"><span>毛主席语录。</del></span></a>
+    </li>
+</ul>
+
+<hr/>
+<p></p>
+<p>
+    如果你喜欢我的项目，并觉得它们很有用，可以考虑<a href="#" id="sponsor">赞助我</a>，以帮助项目可持续发展。谢谢！
+</p>
+<section id="sponsor-box"> 
+    <header></header>
+    <figure>
+      <img src="WechatIMG325.jpg" alt="Image with caption" title="Image with caption">
+      <figcaption style="font-size: 10px;margin-top: 10px">感谢支持</figcaption>
+    </figure>
+  </section>
+<p id="footer"><br></p>
+</div>
+</body>
+<script>
+    const sponsor = document.querySelector('#sponsor')
+    sponsor.addEventListener('click',(e)=>{
+        e.preventDefault()
+        document.querySelector('#sponsor-box').style.display='block';
+        setTimeout(()=>{
+            var scrollableDiv= document.getElementById('footer');
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        },100)
+    })
+
+    // const black = document.querySelector('#black')
+    // const dialog = document.querySelector('dialog')
+    // const closeBtn = document.querySelector('.btn-default')
+
+    // black.addEventListener('click',(e)=>{
+    //     e.preventDefault()
+    //     dialog.showModal()
+    // })
+    // dialog.addEventListener('click', (event) => {
+    //     if (event.target === dialog) {
+    //         dialog.close();
+    //     }
+    // });
+    // closeBtn.addEventListener('click',()=>{
+    //     dialog.close()
+    // })
+    
+</script>
+</html>

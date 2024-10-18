@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js"></script>
+  <title>财神Live</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      background: url('2022-11-04\ 161441.jpg') center;
+      background-size: cover;
+      backdrop-filter: blur(8px);
+    }
+
+    .item {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: moveUp linear infinite;
+    }
+
+    @keyframes moveUp {
+      from {
+        transform: translateY(100vh);
+      }
+
+      to {
+        transform: translateY(-100vh);
+      }
+    }
+
+    .item .avatar,
+    .item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      z-index: 1
+    }
+
+    .item .nickname {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 3px;
+      font-size: 12px;
+      padding: 2px;
+      color: #fff;
+      margin-top: 8px;
+      z-index: 1
+    }
+
+    .item .avatar1 {
+      width: 70px;
+      height: 70px;
+      border-radius: 100px;
+      z-index: 10
+    }
+
+    .item .nickname1 {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 3px;
+      font-size: 18px;
+      padding: 2px;
+      color: #980303;
+      margin-top: 8px;
+      z-index: 10;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      /* 金色渐变 */
+      -webkit-background-clip: text;
+      /* 将背景裁剪为文本形状 */
+      background-clip: text;
+      /* 标准属性 */
+      color: transparent;
+      /* 使文本颜色透明 */
+      font-size: 20px;
+      /* 设置字体大小 */
+      font-weight: bold;
+      /* 设置字体加粗 */
+    }
+
+    video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100;
+      -webkit-filter: blur(100)
+    }
+
+    @view-transition {
+      navigation: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div>
+    <!-- <video src="./334_1727257252.mp4"  autoplay loop></video> -->
+  </div>
+</body>
+<script src="./createDom.js"></script>
+<script src="./speak.js?id=22"></script>
+<script src="./socket.js"></script>
+<script src="./room.js"></script>
+
+<script>
+  document.querySelector('video')?.volume = 0.2
+  start(646454278948)
+</script>
+<script type="module">
+  /* import { getVoices,tts } from './edgetts.js'
+
+  const audioBuffer1 = await tts('hello world')
+  console.log(audioBuffer1)
+
+  const audioBuffer = await getVoices()
+  console.log(audioBuffer) */
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+    <style>
+        li{
+            margin-bottom: 5px;
+        }
+        #sponsor-box{
+            display: none;
+        }
+        .image-grid {
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(calc(var(--page-width) / 12), 1fr));
+}
+    </style>
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="terminal-nav">
+          <header class="terminal-logo">
+            <div class="logo terminal-prompt"><a href="/" class="no-style">Zhang Zhi
+            </a></div>
+          </header>
+          <nav class="terminal-menu" style="display: none;">
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+              <li><a href="/" class="menu-item"><span>Light</span></a><meta property="position"></li>
+              <li property="itemListElement" typeof="ListItem"><a href="/dark/" property="item" typeof="WebPage" class="menu-item"><span property="name">Dark</span></a><meta property="position" content="1"></li>
+              <li property="itemListElement" typeof="ListItem"><a href="/sans-serif/" property="item" typeof="WebPage" class="menu-item"><span property="name">Sans</span></a><meta property="position" content="2"></li>
+              <li property="itemListElement" typeof="ListItem"><a href="/sans-serif-dark/" property="item" typeof="WebPage" class="menu-item"><span property="name">Sans Dark</span></a><meta property="position" content="3"></li>
+              <li style="height: 28px;"><span></span></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <p></p>
+      <div class="container">
+        <p>
+          <p>非常感谢所有赞助商！</p>
+        </p>
+        <p>
+          如果你喜欢我的项目，并觉得它们很有用，可以考虑<a href="#" id="sponsor">赞助我</a>，以帮助项目可持续发展。谢谢！
+      </p>
+      <section id="sponsor-box"> 
+        <header></header>
+        <figure>
+          <img src="1.jpg" alt="Image with caption" title="Image with caption">
+          <figcaption>感谢支持</figcaption>
+        </figure>
+      </section>
+
+      <hr>
+      <section>
+        <header>
+            <h2 id="Tables">赞助列表</h2>
+        </header>
+        <table><thead>
+                <tr>
+                    <th>赞助人</th>
+                    <th>赞助金额</th>
+                    <th>留言</th>
+                </tr>
+            </thead>
+            <tbody><tr>
+                <td>一斤染</td>
+                <td>10元</td>
+                <td>很好，希望你继续做下去</td>
+                
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+<script>
+  const sponsor = document.querySelector('#sponsor')
+  sponsor.addEventListener('click',(e)=>{
+      e.preventDefault()
+      document.querySelector('#sponsor-box').style.display='block';
+  })
+</script>
+</html>

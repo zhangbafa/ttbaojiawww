@@ -1,0 +1,366 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZHI</title>
+    <meta
+      name="description"
+      content="一个狂热的独立开发者"
+    />
+    <meta name="keyword" content="工具集合,工具箱,图片剪辑,查询工具,开发工具,小工具,效率工具箱,独立开发者，出海应用。">
+    <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.1.4/pixi.min.js"></script>
+    <script src="./wangming.js"></script>
+    <style>
+        li{
+            margin-bottom: 5px;
+        }
+        #sponsor-box{
+            display: none;
+        }
+        :root{
+            --font-stack:"Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New";
+        }
+        .canvas{
+          width: 430px;
+          margin-right: auto;
+          border-radius: 3px;
+        }
+        .right{
+          margin-left: 20px;
+        }
+        .roomid-box{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+    img{
+        border-radius: 100%;
+    }
+    .btn{
+      padding: .2em 0.5em
+    }
+    </style>
+</head>
+<body class="terminal">
+  <div class="roomid-box"> 
+    <input id="room_id" name="email" type="text" required placeholder="房间号" value="177656253155" style="width: 200px">
+    <div style="padding: 0 10px">
+      <input name="checkbox" type="checkbox" id="bofang" checked>播放声音
+    </div>
+    <button class="btn btn-default" type="submit" role="button" name="submit" id="startButton">连接</button>
+    <span>
+      shift+h,显示/隐藏
+    </span>
+
+</div>
+<div class="alert">
+
+</div>
+</body>
+<script>
+  var show=true
+  var bofang=true
+   document.addEventListener('keydown', function(event) {
+            if ( event.key === 'H') {
+              console.log('sdf')
+                event.preventDefault(); // 阻止默认行为（如保存网页）
+                if(show){
+                  document.querySelector('.roomid-box').style.display='none'
+                  document.querySelector('.alert').innerHTML=''
+                  document.querySelector('.alert').style.display="none"
+                  show = false
+                }else{
+                  document.querySelector('.roomid-box').style.display='flex'
+                  document.querySelector('.alert').style.display="block"
+                  show = true
+                }
+
+            }
+   });
+   
+ 
+
+   let canSpeak = false;
+    (async () =>
+{
+
+  // Text.defaultResolution = 2;
+// Text.defaultAutoResolution = false;
+    // Create a PixiJS application.
+    const app = new PIXI.Application();
+    await app.init({resizeTo: window,backgroundColor:'0x00FF00',antialias: true ,preserveDrawingBuffer:true});
+    document.body.appendChild(app.canvas);
+    // document.querySelector('.canvas').appendChild(app.canvas)
+    // app.renderer.resize(430, 500);
+
+    // 加载背景图片资源
+    // const texture = await PIXI.Assets.load('./WechatIMG327.jpg');
+    // const backgroundSprite = new PIXI.Sprite(texture);
+    // backgroundSprite.width = app.screen.width;
+    // backgroundSprite.height = app.screen.height;
+    // backgroundSprite.x = 0;
+    // backgroundSprite.y = 0;
+    // app.stage.addChild(backgroundSprite);
+
+    let avatars = [];
+   
+    const avatarContainer = new PIXI.Container();
+
+//     document.addEventListener('visibilitychange', function() {
+//     if (document.hidden) {
+//         console.log('页面失活，暂停渲染')
+//         app.ticker.stop();
+//     } else {
+//         // 
+//         console.log('页面重新激活，恢复渲染')
+//         app.ticker.start();
+//     }
+// });
+
+    app.ticker.add(() => {
+      for (let i = avatars.length - 1; i >= 0; i--) {
+        const container = avatars[i];
+        container.y -= container.speed;
+
+        // 检查容器是否超出画布顶部
+        if (container.y + container.height < 0) {
+          app.stage.removeChild(container);
+          avatars.splice(i, 1); // 从 avatars 数组中移除
+        }
+      }
+    });
+
+    async function createAvatar(user) {
+      const container = new PIXI.Container();
+
+      const texture = await PIXI.Assets.load(user.avatar);
+      const avatar = new PIXI.Sprite(texture);
+      const scale = Math.random() * 0.5 + 1; // 大小在 0.5 到 1 之间随机
+      
+      const fixedSize = 30; // 统一头像尺寸
+      avatar.width = fixedSize;
+      avatar.height = fixedSize;
+      // avatar.scale.set(scale);
+      const size = Math.random() * 100 + 50; // 随机大小
+            // avatar.width = size;
+            // avatar.height = size;
+
+      avatar.x = 0; // 相对于容器的坐标
+      avatar.y = 0; // 相对于容器的坐标
+
+      
+      let frame = new PIXI.Graphics()
+      .circle(avatar.width/2, avatar.height/2, (avatar.width / 2))
+      .fill(0x000000)
+      // frame.scale.set(scale);
+      frame.x = 0
+      frame.y = 0
+      frame.zIndex = 100
+      avatar.mask = frame
+
+
+      const texture2 = await PIXI.Assets.load(user.giftUri);
+      const gift = new PIXI.Sprite(texture2);
+      gift.x = 0
+      gift.y = -50
+
+      gift.width = 50
+      gift.height = 50
+
+      // 创建文本对象
+      const text = new PIXI.Text({
+        text:user.nickname+user.giftName,
+        style:{
+          fontFamily: 'Yahei',
+          fontSize: 14,
+          fill: 0xffffff,
+          align: 'center'
+        }
+      });
+      text.x = -text.width / 2; // 水平居中
+      text.y = avatar.height + 10; // 文本位于头像的下方
+
+
+
+
+      
+
+      // 计算容器的宽度和高度
+      const containerWidth = Math.max(avatar.width, text.width);
+      const containerHeight = avatar.height + text.height + 10;
+
+      // 设置容器的位置，使其在屏幕上居中
+      // container.x = (app.screen.width - containerWidth) / 2;
+      // container.y = (app.screen.height - containerHeight) / 2;
+
+      // 调整头像和文本在容器内的相对位置，使其在容器内居中
+      avatar.x = (containerWidth - avatar.width) / 2;
+      frame.x = (containerWidth - avatar.width) / 2;
+      gift.x = (containerWidth - avatar.width) / 2;
+      text.x = (containerWidth - text.width) / 2;
+
+      container.x = Math.random() * (app.screen.width-containerWidth); // 容器的水平位置随机
+      container.y = app.screen.height; // 容器从底部开始
+      container.speed = 2/scale; // 速度与大小成反比
+
+      container.addChild(avatar);
+      container.addChild(text);
+      container.addChild(gift);
+      container.addChild(frame);
+      app.stage.addChild(container);
+      avatars.push(container);
+    }
+
+    var wsUrl = "ws://47.96.139.114:4200";
+    var ws;
+    var tt;
+    document.getElementById('startButton').addEventListener('click', () => {
+      const room_id =  document.querySelector('#room_id').value
+      canSpeak = true;
+      bofang = document.querySelector('#bofang').checked
+      createWebSocket(wsUrl);
+    });
+    var lockReconnect = false;
+    function createWebSocket() {
+      try {
+        ws = new WebSocket(wsUrl);
+        init();
+      } catch(e) {
+        console.log('catch');
+        reconnect(wsUrl);
+      }
+    }
+    function init() {
+      ws.onclose = function () {
+        console.log('链接关闭');
+        // times_tt && clearInterval(times_tt)
+        
+        reconnect(wsUrl);
+      };
+      ws.onerror = function() {
+        console.log('发生异常了');
+        reconnect(wsUrl);
+      };
+      ws.onopen = function () {
+        //心跳检测重置
+        heartCheck.start();
+        const room_id =  document.querySelector('#room_id').value
+        ws.send(`{"url":"https://live.douyin.com/${room_id}"}`);
+        document.querySelector('.alert').innerHTML="已连接成功，声音已打开。"
+      };
+      const synth = window.speechSynthesis;
+
+      ws.onmessage = function (event) {
+        //拿到任何消息都说明当前连接是正常的
+      const data = JSON.parse(event.data);
+      // data.memberCount;
+      console.log(data)
+      if(data){
+          // console.log(data.gift)
+            const message = {
+            nickname: data.user.nickName,
+            avatar: data.user.AvatarThumb.urlListList[0],
+            content: data.content
+        }
+        if(data?.gift){
+          message.giftUri = data.gift.icon.urlListList[0]
+          message.giftName =  data.gift.describe
+        }
+          if(canSpeak && bofang){
+            if (!synth.speaking && !containsEmoji(message.nickname) && !isSpecificFormat(message)) {
+              const utterance = new SpeechSynthesisUtterance();
+              if(data?.gift){
+                utterance.text = '感谢'+message.nickname+message.giftName;
+              }
+              // else if (data?.memberCount && data.memberCount>10){
+              //   // 使用真实数据
+              //   utterance.text = '欢迎'+message.nickname+'进入直播间'
+              // }else{
+              //   const randomIndex = Math.floor(Math.random() * randomChineseNicknames.length);
+              //   utterance.text = '欢迎'+randomChineseNicknames[randomIndex]+'进入直播间'
+              // }
+              utterance.volume = 1;
+              utterance.rate = 1;
+              utterance.pitch = 1;
+              const voices = speechSynthesis.getVoices();
+              if(navigator.userAgent.includes('Edg')){
+                utterance.voice = voices[103]
+              }else{
+                utterance.voice = voices[0]
+              }
+              speechSynthesis.speak(utterance)
+              utterance.onend = (event) => {
+                  // console.log('朗读结束');
+              };
+              utterance.onstart = (event) => {
+                  // console.log('朗读开始');
+              };
+            }
+          }
+
+        if(document.hidden){
+          
+        }else{
+          if(data?.gift){
+            createAvatar(message)
+        }
+          
+        }
+      }
+        heartCheck.start();
+      }
+    }
+    function reconnect(url) {
+      if(lockReconnect) {
+        return;
+      };
+      lockReconnect = true;
+      //没连接上会一直重连，设置延迟避免请求过多
+      tt && clearTimeout(tt);
+     
+      tt = setTimeout(function () {
+        createWebSocket(url);
+        lockReconnect = false;
+      }, 4000);
+    }
+    //心跳检测
+    var heartCheck = {
+      timeout: 3000,
+      timeoutObj: null,
+      serverTimeoutObj: null,
+      start: function(){
+        // console.log('start');
+        var self = this;
+        this.timeoutObj && clearTimeout(this.timeoutObj);
+        this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+        this.timeoutObj = setTimeout(function(){
+          //这里发送一个心跳，后端收到后，返回一个心跳消息，
+          console.log('55555');
+          ws.send("123456789");
+          self.serverTimeoutObj = setTimeout(function() {
+            console.log(111);
+            console.log(ws);
+            ws.close();
+            // createWebSocket();
+          }, self.timeout);
+
+        }, this.timeout)
+      }
+    }
+    // createWebSocket(wsUrl);
+
+})();
+   
+function containsEmoji(text) {
+    // 表情符号的Unicode范围
+    const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}\u{1F1E0}-\u{1F1FF}]/u;
+    return emojiRegex.test(text);
+}
+function isSpecificFormat(username) {
+    // 匹配格式：用户 + 一长串数字
+    const formatRegex = /^用户\d{10,}$/;
+    return formatRegex.test(username);
+}
+</script>
+</html>

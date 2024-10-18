@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千川ROI计算</title>
+    <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.1.nomodule.min.js"></script>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50vw;
+            height: 100vh; 
+        }
+        
+        #result{
+          font-size: 20px;
+          font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+  <h3>千川ROI计算</h3>
+    <div class="container">
+      
+        <form id="myForm" action="#">
+            <div class="form-group">
+              <label for="email">计划投入（元）:</label>
+              <input  name="amount" type="text" id="amount" required placeholder="" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="textarea">佣金（%）:</label>
+                <input  name="commission" type="text" id="commission" required placeholder="" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="email">退货率（%）:</label>
+                <input  name="refundRate" type="text"  placeholder="" id="refundRate"> 
+              </div>
+            
+            <div class="form-group">
+              <button class="btn btn-default" type="submit" role="button" name="submit" id="submit">计算</button>
+            </div>
+            <div id="result"></div>            
+        </form>
+    </div>
+
+    <script>
+        const { a, div, li, p, ul, img, span } = van.tags;
+
+        document.querySelector('#myForm').addEventListener('submit', (event) => {
+            event.preventDefault(); // 阻止表单的默认提交行为
+
+            // 获取输入框的值
+            const amount = parseFloat(document.querySelector('#amount').value)
+            const commission = parseFloat(document.querySelector('#commission').value)/100;
+            const refundRate = 1 - (parseFloat(document.querySelector('#refundRate').value)/100)
+            const unitIncome = amount*commission*refundRate
+            // const result = Math.ceil(amount/unitIncome)
+            const result = (amount/unitIncome).toFixed(2)
+            // 显示结果
+            const resultElement = document.querySelector('#result');
+            // 计算结果
+            resultElement.textContent = `ROI:${result}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>直播数据统计</title>
+  <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.5.1.nomodule.min.js"></script>
+  <!-- <script src="https://unpkg.com/vue"></script> -->
+    <!-- <script src="https://unpkg.com/naive-ui"></script> -->
+  <style>
+    li{
+        margin-bottom: 3px;
+    }
+    #sponsor-box{
+        display: none;
+    }
+    :root{
+        --font-stack:"Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New";
+    }
+    .roomid-box{
+        display: flex;
+        justify-content: start;
+    }
+    img{
+        border-radius: 100%;
+    }
+    .btn{
+      padding: .2em 0.5em
+    }
+    @font-face {
+  font-family: "阿里妈妈方圆体 VF Regular";src: url("//at.alicdn.com/wf/webfont/jgGjJ3ckKOwU/4zE1Gi8SEH3A.woff2") format("woff2"),
+  url("//at.alicdn.com/wf/webfont/jgGjJ3ckKOwU/p5tR7FzhY85M.woff") format("woff");
+  font-display: swap;
+}
+.gradient-border-alternative {
+        font-size: 40px;
+        font-family: "阿里妈妈方圆体 VF Regular";
+        font-weight: bold;
+      }
+</style>
+</head>
+<body class="terminal">
+    <div class="container">
+        <div class="roomid-box"> 
+            <input id="room_id" name="email" type="text" required placeholder="房间号">
+            <button class="btn btn-default" type="submit" role="button" name="submit" id="submit">连接</button>
+
+        </div>
+        <!-- 预计收益:¥{{ Number((total_amount/10)*0.5).toFixed(1) }} -->
+        
+        <section>
+            <!-- <header><h2 id="Lists">Lists</h2></header> -->
+            <ul>
+              <li class="online_user">直播间人数 -- </li>
+              <li class="fans">粉丝数 -- </li>
+              <li class="room">观看人次 -- </li>
+              <li class="live">点赞数 -- </li>
+              <li class="gift">礼物 -- </li>
+              <li class="gift2">预计收入 -- ¥  </li>
+              <li class="enter_room_time">进入直播间时间 -- </li>
+            </ul>
+          </section>
+          <hr/>
+        <section>
+            <header><h2 id="Cards">弹幕</h2></header>
+            <div class="terminal-card">
+              <!-- <header>Card Title</header> -->
+              <div class="chatlist">
+                
+              </div>
+            </div>
+            <br>
+          </section>
+    </div>
+  <script type="text/javascript">
+    document.querySelector('#submit').addEventListener('click',()=>{
+        room_id.val =  document.querySelector('#room_id').value
+        alert('服务已下线，感谢支持')
+        return false;
+    })
+
+   
+    
+
+    
+    </script>
+</body>
+</html>
